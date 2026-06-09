@@ -1,7 +1,8 @@
 #include "../graph/Graph.h"
 #include "../traversal/DFS.h"
+#include "Source.h"
 
-static int findsource(const Graph& g){
+static int Source::findsource(const Graph& g){
 	int n = g.size();
 	vector<int> order;
 	vector<int> state(n,0);

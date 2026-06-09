@@ -115,7 +115,7 @@ static vector<pair<int,int>> MakeAcyclic::dfs_dir(const Graph&g){
 	
 	return back_edge;
 }
-static bool reach(const Graph&g, int src, int dst){
+static bool MakeAcyclic::reach(const Graph&g, int src, int dst){
 	bool found = false;
 	Bfs::run(g,src,
 		[&](int u, int parent, int d){

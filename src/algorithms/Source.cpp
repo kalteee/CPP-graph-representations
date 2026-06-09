@@ -1,6 +1,6 @@
 #include "../graph/Graph.h"
 #include "../traversal/DFS.h"
-#include "source.h"
+#include "Source.h"
 using namespace std;
 static int Source::findsource(const Graph& g){
 	int n = g.size();

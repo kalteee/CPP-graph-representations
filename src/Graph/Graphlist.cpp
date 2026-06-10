@@ -71,7 +71,18 @@ bool hasedge(int u, int v) const{
 		outdegree.assign(n,0);
 		edges.clear();
 	}
+	GraphList GraphList::fromMatrix(const Graphmtx& G)
+{
+    GraphList H;
+    H.resize(G.size());
 
+    for(int i=0;i<G.size();i++)
+        for(int j=0;j<G.size();j++)
+            if(G.hasedge(i,j))
+                H.add_edge(i,j);
+
+    return H;
+}
 	int  sources() const{
 		int  res = 0;
 		for(int i = 0; i<indegree.size(); i++){

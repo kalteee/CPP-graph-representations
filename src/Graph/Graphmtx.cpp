@@ -1,6 +1,6 @@
 #include "Graphmtx.h"
 
-Graphmtx::GraphMatrix() : n(0) {}
+Graphmtx::GraphMtx() : n(0) {}
 
 void Graphmtx::resize(int n_) {
     n = n_;

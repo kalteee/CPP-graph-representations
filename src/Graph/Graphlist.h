@@ -4,7 +4,7 @@
 #include <vector>
 #include <utility>
 
-class Graph {
+class GraphList {
 private:
     int n;
     std::vector<std::vector<int>> adj;
@@ -13,7 +13,7 @@ private:
     std::vector<std::pair<int,int>> edges;
 
 public:
-    Graph();
+    GraphList();
 
     bool hasedge(int u,int v) const;
     void add_edge(int u,int v);

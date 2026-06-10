@@ -3,13 +3,13 @@
 
 #include <vector>
 
-class GraphMatrix {
+class Graphmtx {
 private:
     int n;
     std::vector<std::vector<int>> mat;
 
 public:
-    GraphMatrix();
+    Graphmtx();
 
     void resize(int n);
 

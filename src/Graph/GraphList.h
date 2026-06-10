@@ -4,7 +4,7 @@
 #include <vector>
 #include <utility>
 
-class GraphList {
+class GraphList : public IGraph{
 private:
     int n;
     std::vector<std::vector<int>> adj;
@@ -24,8 +24,12 @@ public:
     void resize(int n);
 
     int sources() const;
-    int size() const;
-
+    int size() const override{
+        return n;
+    };
+    std::vector<int> neighbors(int u) const override{
+        return adj[u];
+    }
     static GraphList fromMatrix(const GraphMatrix& G);
 
     const std::vector<std::vector<int>>& adjlist() const;

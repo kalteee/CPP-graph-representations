@@ -26,6 +26,8 @@ public:
     int sources() const;
     int size() const;
 
+    static GraphList fromMatrix(const GraphMatrix& G);
+
     const std::vector<std::vector<int>>& adjlist() const;
     const std::vector<int>& indegrees() const;
     const std::vector<int>& outdegrees() const;

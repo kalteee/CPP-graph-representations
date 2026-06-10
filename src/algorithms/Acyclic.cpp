@@ -1,4 +1,4 @@
-#include "MakeAcyclic.h"
+#include "Acyclic.h"
 #include "../traversal/BFS.h"
 #include "../traversal/DFS.h"
 

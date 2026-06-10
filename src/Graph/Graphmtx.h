@@ -23,6 +23,8 @@ public:
     int size() const;
 
     const std::vector<std::vector<int>>& matrix() const;
+
+    static GraphMatrix fromList(const GraphList& G);
 };
 
 #endif

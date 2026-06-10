@@ -1,5 +1,5 @@
-#ifndef GRAPH_H
-#define GRAPH_H
+#ifndef GRAPHLIST_H
+#define GRAPHLIST_H
 
 #include <vector>
 #include <utility>

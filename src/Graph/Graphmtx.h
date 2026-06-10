@@ -3,7 +3,7 @@
 
 #include <vector>
 
-class Graphmtx {
+class Graphmtx : public IGraph{
 private:
     int n;
     std::vector<std::vector<int>> mat;
@@ -20,8 +20,18 @@ public:
 
     void read_mtx();
 
-    int size() const;
-
+    int size() const override{
+        return n;
+    };
+    std::vector<int> neighbors(int u) const override{
+        std::vector<int> res;
+        for(int v = 0; v<n; v++){
+            if(mat[u][v]){
+                res.push_back(v);
+            }
+        }
+        return res;
+    }
     const std::vector<std::vector<int>>& matrix() const;
 
     static Graphmtx fromList(const GraphList& G);

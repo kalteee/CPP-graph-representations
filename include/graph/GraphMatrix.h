@@ -1,39 +1,36 @@
-#ifndef GRAPHMTX_H
-#define GRAPHMTX_H
+#ifndef GRAPH_MATRIX_H
+#define GRAPH_MATRIX_H
+
+#include "IGraph.h"
 
 #include <vector>
 
-class Graphmtx : public IGraph{
+class GraphMatrix : public IGraph {
 private:
     int n;
     std::vector<std::vector<int>> mat;
 
 public:
-    Graphmtx();
+    GraphMatrix();
+    explicit GraphMatrix(int n);
+
+    int size() const override;
+
+    bool has_edge(int u, int v) const override;
+
+    void add_edge(int u, int v) override;
+    void remove_edge(int u, int v) override;
+
+    std::vector<int> neighbors(int u) const override;
 
     void resize(int n);
 
-    void add_edge(int u, int v);
-    void remove_edge(int u, int v);
-
-    bool hasedge(int u, int v) const;
-
-    void read_mtx();
-
-    int size() const override{
-        return n;
-    };
-    std::vector<int> neighbors(int u) const override{
-        std::vector<int> res;
-        for(int v = 0; v<n; v++){
-            if(mat[u][v]){
-                res.push_back(v);
-            }
-        }
-        return res;
-    }
     const std::vector<std::vector<int>>& matrix() const;
 
+    static GraphMatrix from_list(const class GraphList& G);
+};
+
+#endif
     static Graphmtx fromList(const GraphList& G);
 };
 

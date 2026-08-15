@@ -1,10 +1,12 @@
-#ifndef GRAPHLIST_H
-#define GRAPHLIST_H
+#ifndef GRAPH_LIST_H
+#define GRAPH_LIST_H
 
-#include <vector>
+#include "IGraph.h"
+
 #include <utility>
+#include <vector>
 
-class GraphList : public IGraph{
+class GraphList : public IGraph {
 private:
     int n;
     std::vector<std::vector<int>> adj;
@@ -14,28 +16,27 @@ private:
 
 public:
     GraphList();
+    explicit GraphList(int n);
 
-    bool hasedge(int u,int v) const;
-    void add_edge(int u,int v);
-    void remove_edge(int u,int v);
+    int size() const override;
 
-    void read_edges();
-    void read_mtx();
+    bool has_edge(int u, int v) const override;
+
+    void add_edge(int u, int v) override;
+    void remove_edge(int u, int v) override;
+
+    std::vector<int> neighbors(int u) const override;
+
     void resize(int n);
 
     int sources() const;
-    int size() const override{
-        return n;
-    };
-    std::vector<int> neighbors(int u) const override{
-        return adj[u];
-    }
-    static GraphList fromMatrix(const GraphMatrix& G);
 
     const std::vector<std::vector<int>>& adjlist() const;
     const std::vector<int>& indegrees() const;
     const std::vector<int>& outdegrees() const;
-    const std::vector<std::pair<int,int>>& getedges() const;
+    const std::vector<std::pair<int,int>>& get_edges() const;
+
+    static GraphList from_matrix(const class GraphMatrix& G);
 };
 
 #endif

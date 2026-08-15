@@ -4,11 +4,16 @@
 
 using namespace std;
 
-bool hasedge(int u, int v) const{
-		if(u < v || u>=(int)adj.size()) return false;
-		for(int w:adj[u]) if(w == v) return true;
-		return false;
-	}
+bool GraphList::has_edge(int u, int v) const {
+    if (u < 0 || u >= n || v < 0 || v >= n)
+        return false;
+
+    for (int w : adj[u])
+        if (w == v)
+            return true;
+
+    return false;
+}
 
 	void add_edge(int u, int v){
 		if(!hasedge(u,v)){

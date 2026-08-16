@@ -27,3 +27,9 @@ cd build
 cmake ..
 make
 ```
+### 3. run the executable 
+Ensure you run the executable from the root directory so it can find the examples/graph1.txt files correctly, or copy the executable to the root.
+```bash
+cd ..
+./build/graph_app
+```

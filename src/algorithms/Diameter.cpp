@@ -1,7 +1,7 @@
 #include "Diameter.h"
 #include "../traversal/BFS.h"
 
-int Diameter::compute(const Graph& g)
+int Diameter::compute(const IGraph& g)
 {
     int diam = 0;
 		for(int s = 0; s < g.size(); s++){

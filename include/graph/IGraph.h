@@ -2,6 +2,7 @@
 #define IGRAPH_H
 
 #include <vector>
+#include <memory> 
 
 class IGraph {
 public:

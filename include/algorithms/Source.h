@@ -1,11 +1,11 @@
 #ifndef SOURCE_H
 #define SOURCE_H
 
-#include "../graph/Graph.h"
+#include "../graph/IGraph.h"
 
 class Source {
 public:
-    static int findsource(const Graph&);
+    static int findsource(const IGraph&);
 };
 
 #endif

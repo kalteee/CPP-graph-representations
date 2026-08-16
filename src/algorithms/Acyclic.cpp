@@ -1,14 +1,14 @@
 #include "../../include/algorithms/Acyclic.h"
 #include "../../include/traversal/BFS.h"
 #include "../../include/traversal/DFS.h"
-#include "../../include/graph/GraphList.h" // Szükséges az ideiglenes gráfokhoz
+#include "../../include/graph/GraphList.h" 
 #include <vector>
 #include <utility>
 #include <memory>
 
 using namespace std;
 
-// Segédfüggvény: begyűjti az összes élet az absztrakt IGraph-ból
+
 static vector<pair<int,int>> get_all_edges(const IGraph& g) {
     vector<pair<int,int>> edges;
     for(int u = 0; u < g.size(); ++u) {
@@ -20,7 +20,7 @@ static vector<pair<int,int>> get_all_edges(const IGraph& g) {
 }
 
 vector<pair<int,int>> MakeAcyclic::cycleremoval(const IGraph& g){
-    auto f = g.clone(); // f egy unique_ptr
+    auto f = g.clone(); //f ~ unique_ptr
     vector<pair<int,int>> removed;
     bool changed = true;
     

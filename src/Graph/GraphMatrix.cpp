@@ -27,7 +27,7 @@ void GraphMatrix::add_edge(int u, int v) {
     if (u < 0 || u >= n || v < 0 || v >= n)
         return;
 
-    mat[u][v] = 1; // Itt 1-est állítunk be (irányított / súlyozatlan gráf feltételezésével)
+    mat[u][v] = 1; // The graph is unweighted
 }
 
 void GraphMatrix::remove_edge(int u, int v) {

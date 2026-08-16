@@ -4,7 +4,7 @@
 
 using namespace std;
 
-static vector<pair<int,int>> MakeAcyclic::cycleremoval(const Graph& g){
+static vector<pair<int,int>> MakeAcyclic::cycleremoval(const IGraph& g){
 	Graph f = g;
 	vector<pair<int,int>> removed;
 	bool changed = true;

@@ -1,6 +1,6 @@
 #include "../../include/algorithms/Source.h"
 #include "../../include/traversal/DFS.h"
-#include "../../include/graph/GraphList.h" // A transzponált gráfhoz kell
+#include "../../include/graph/GraphList.h" 
 #include <vector>
 #include <algorithm>
 #include <unordered_set>
@@ -12,7 +12,7 @@ int Source::findsource(const IGraph& g){
     vector<int> order;
     vector<int> state(n, 0);
     
-    // Első DFS: topologikus sorrend előállítása
+    // First DFS for topological sort
     for(int s = 0; s < n; s++){
         if(state[s] != 0) continue;
         Dfs::run(g, s, state,
@@ -22,7 +22,7 @@ int Source::findsource(const IGraph& g){
         );
     }
 
-    // Transzponált gráf építése
+    // creating the transposed graph
     GraphList gr(n);
     for(int u = 0; u < n; ++u) {
         for(int v : g.neighbors(u)) {
@@ -35,7 +35,7 @@ int Source::findsource(const IGraph& g){
     reverse(order.begin(), order.end());
     vector<int> state2(n, 0);
     
-    // Második DFS a transzponált gráfon (SCC keresés)
+    // Second DFS on transposed graph -> Strongly Connected Components
     for(int u : order){
         if(comp[u] != -1) continue;
         vector<int> st;
@@ -51,7 +51,7 @@ int Source::findsource(const IGraph& g){
         cid++;
     }
 
-    // Komponens-gráf (DAG) felépítése
+    //building Component/Reduced graph
     vector<int> indeg(cid, 0);
     vector<unordered_set<int>> scc_adj(cid);
     
@@ -69,7 +69,7 @@ int Source::findsource(const IGraph& g){
     int src = -1;
     int cnt = 0;
     
-    // Keresünk 0 bemenő fokú SCC-t
+    // Finding a 0 indegree node in the reduced graph
     for(int i = 0; i < cid; i++){
         if(indeg[i] == 0){
             src = i;
@@ -77,7 +77,7 @@ int Source::findsource(const IGraph& g){
         }
     }
     
-    // Ha több "forrás" SCC van, akkor nincs globális forrás
+    // In the case the source is not unique
     if(cnt != 1){
         return -1;
     } else {

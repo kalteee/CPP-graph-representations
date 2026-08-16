@@ -35,11 +35,11 @@ static vector<pair<int,int>> MakeAcyclic::cycleremoval(const IGraph& g){
 	return final;
 }
 
-static vector<pair<int,int>> MakeAcyclic::dfsmethod(const Graph& g){
+static vector<pair<int,int>> MakeAcyclic::dfsmethod(const IGraph& g){
 	return dfs_dir(g);
 }
 
-static vector<pair<int,int>> MakeAcyclic::buildacyclic(const Graph &g, const vector<pair<int,int>> edges){
+static vector<pair<int,int>> MakeAcyclic::buildacyclic(const IGraph &g, const vector<pair<int,int>> edges){
 	Graph h;
 	h.resize(g.size());
 	vector<pair<int,int>> remaining;
@@ -54,7 +54,7 @@ static vector<pair<int,int>> MakeAcyclic::buildacyclic(const Graph &g, const vec
 	return remaining;
 }
 // d feladat: top: topologikus sorrendben levő csúcsok, antitop: topologikussal ellentétes sorrend. A kisebbikből beszúrom az éleket ha tudom.
-static vector<pair<int,int>> MakeAcyclic::partition(const Graph& g){
+static vector<pair<int,int>> MakeAcyclic::partition(const IGraph& g){
 	Graph top;
 	Graph antitop;
 	top.resize(g.size());

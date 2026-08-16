@@ -1,46 +1,44 @@
 #ifndef BFS_H
 #define BFS_H
 
-#include "../graph/Graph.h"
+#include "../graph/IGraph.h"
 #include <queue>
+#include <vector>
 
 class Bfs{
 public:
-template<typename Discover, typename Finish>
-static void run(
-    const IGraph& g,
-    int start,
-    Discover discover,
-    Finish finish
-) {
-    int n = g.size();
+    template<typename Discover, typename Finish>
+    static void run(
+        const IGraph& g,
+        int start,
+        Discover discover,
+        Finish finish
+    ) {
+        int n = g.size();
 
-    vector<int> dist(n, -1);
-    queue<int> q;
+        std::vector<int> dist(n, -1);
+        std::queue<int> q;
 
-    q.push(start);
-    dist[start] = 0;
+        q.push(start);
+        dist[start] = 0;
 
-    discover(start, -1, 0);
+        discover(start, -1, 0);
 
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
+        while (!q.empty()) {
+            int u = q.front();
+            q.pop();
 
-        for (int v : g.neighbors(u)) {
-            if (dist[v] == -1) {
-                dist[v] = dist[u] + 1;
-
-                discover(v, u, dist[v]);
-
-                q.push(v);
+            for (int v : g.neighbors(u)) {
+                if (dist[v] == -1) {
+                    dist[v] = dist[u] + 1;
+                    discover(v, u, dist[v]);
+                    q.push(v);
+                }
             }
+
+            finish(u);
         }
-
-        finish(u);
     }
-}
 };
-
 
 #endif

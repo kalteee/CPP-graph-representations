@@ -1,32 +1,34 @@
 #ifndef MAKEACYCLIC_H
 #define MAKEACYCLIC_H
 
-#include "../graph/Graph.h"
+#include "../graph/IGraph.h"
+#include <vector>
+#include <utility>
 
 class MakeAcyclic {
 public:
     static std::vector<std::pair<int,int>>
-        cycleremoval(const Graph&);
+        cycleremoval(const IGraph&);
 
     static std::vector<std::pair<int,int>>
-        dfsmethod(const Graph&);
+        dfsmethod(const IGraph&);
 
     static std::vector<std::pair<int,int>>
         buildacyclic(
-            const Graph&,
+            const IGraph&,
             const std::vector<std::pair<int,int>>&);
 
     static std::vector<std::pair<int,int>>
-        partition(const Graph&);
+        partition(const IGraph&);
 
 private:
     static bool reach(
-        const Graph&,
+        const IGraph&,
         int,
         int);
 
     static std::vector<std::pair<int,int>>
-        dfs_dir(const Graph&);
+        dfs_dir(const IGraph&);
 };
 
 #endif

@@ -5,7 +5,7 @@
 using namespace std;
 
 static vector<pair<int,int>> MakeAcyclic::cycleremoval(const IGraph& g){
-	Graph f = g;
+	auto f = g.clone();
 	vector<pair<int,int>> removed;
 	bool changed = true;
 	while(changed){
@@ -14,7 +14,7 @@ static vector<pair<int,int>> MakeAcyclic::cycleremoval(const IGraph& g){
 		for(auto [u,v] : edges){
 			if(!f.hasedge(u,v)) continue;
 			if(reach(f,v,u)){
-				f.remove_edge(u,v);
+				f->remove_edge(u, v);
 				removed.push_back({u,v});
 				changed = true;
 				break;

@@ -4,6 +4,7 @@
 #include "IGraph.h"
 
 #include <vector>
+#include <memory>
 
 class GraphMatrix : public IGraph {
 private:
@@ -22,16 +23,14 @@ public:
     void remove_edge(int u, int v) override;
 
     std::vector<int> neighbors(int u) const override;
+    
+    std::unique_ptr<IGraph> clone() const override; // clone implementálása
 
     void resize(int n);
 
     const std::vector<std::vector<int>>& matrix() const;
 
     static GraphMatrix from_list(const class GraphList& G);
-};
-
-#endif
-    static Graphmtx fromList(const GraphList& G);
 };
 
 #endif

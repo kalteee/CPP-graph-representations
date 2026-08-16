@@ -5,6 +5,7 @@
 
 #include <utility>
 #include <vector>
+#include <memory>
 
 class GraphList : public IGraph {
 private:
@@ -26,6 +27,8 @@ public:
     void remove_edge(int u, int v) override;
 
     std::vector<int> neighbors(int u) const override;
+    
+    std::unique_ptr<IGraph> clone() const override; // clone implementálása
 
     void resize(int n);
 

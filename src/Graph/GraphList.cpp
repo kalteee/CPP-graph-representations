@@ -3,14 +3,14 @@
 #include <algorithm>
 #include <iostream>
 
-// Konstruktorok
+// Constructors
 GraphList::GraphList() : n(0) {}
 
 GraphList::GraphList(int n_) {
     resize(n_);
 }
 
-// IGraph interfész implementációi
+// IGraph 
 int GraphList::size() const {
     return n;
 }
@@ -93,7 +93,7 @@ const std::vector<std::pair<int, int>>& GraphList::get_edges() const {
     return edges;
 }
 
-// Konverzió
+// Conversion
 GraphList GraphList::from_matrix(const GraphMatrix& G) {
     GraphList H;
     H.resize(G.size());

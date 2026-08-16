@@ -23,7 +23,7 @@ public:
             int u = cur.first;
             int idx = cur.second;
             
-            // Lekérjük a szomszédokat az absztrakt interfészen keresztül
+            // neighbours from abstract interface 
             std::vector<int> szomszedok = g.neighbors(u);
             
             if(idx >= (int)szomszedok.size()){
@@ -33,7 +33,7 @@ public:
                 continue;
             }
             
-            // Index növelése a verem tetején lévő elemhez
+            
             st.top().second++;
             
             int v = szomszedok[idx];

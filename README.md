@@ -17,7 +17,7 @@ This project uses **CMake**. To run this on your local machine, ensure you have 
 ### 1. Clone the repository
 ```bash
 git clone [https://github.com/kalteee/CPP-graph-representations.git](https://github.com/kalteee/CPP-graph-representations.git)
-cd YOUR-REPO-NAME
+cd CPP-graph-representations
 ```
 ### 2. Build the project
 It is recommended to build the project in a separate build directory: 

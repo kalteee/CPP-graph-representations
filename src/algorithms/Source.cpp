@@ -2,7 +2,7 @@
 #include "../traversal/DFS.h"
 #include "Source.h"
 using namespace std;
-static int Source::findsource(const Graph& g){
+static int Source::findsource(const IGraph& g){
 	int n = g.size();
 	vector<int> order;
 	vector<int> state(n,0);

@@ -16,6 +16,7 @@ public:
     virtual std::vector<int> neighbors(int u) const = 0;
 
     virtual ~IGraph() = default;
+    virtual std::unique_ptr<IGraph> clone() const = 0;
 };
 
 #endif

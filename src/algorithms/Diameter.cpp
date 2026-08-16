@@ -18,7 +18,7 @@ int Diameter::compute(const IGraph& g)
         );
 
         for(int d : dist){
-            if(d == -1) return -1; // Ha a gráf nem összefüggő
+            if(d == -1) return -1; // When the graph is not connected
             diam = max(d, diam);
         }
     }

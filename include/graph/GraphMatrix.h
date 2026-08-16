@@ -24,7 +24,7 @@ public:
 
     std::vector<int> neighbors(int u) const override;
     
-    std::unique_ptr<IGraph> clone() const override; // clone implementálása
+    std::unique_ptr<IGraph> clone() const override; 
 
     void resize(int n);
 

@@ -1,8 +1,19 @@
-#include "Graphlist.h"
+#include "../../include/graph/GraphList.h"
+#include "../../include/graph/GraphMatrix.h"
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
+// Konstruktorok
+GraphList::GraphList() : n(0) {}
+
+GraphList::GraphList(int n_) {
+    resize(n_);
+}
+
+// IGraph interfész implementációi
+int GraphList::size() const {
+    return n;
+}
 
 bool GraphList::has_edge(int u, int v) const {
     if (u < 0 || u >= n || v < 0 || v >= n)
@@ -15,99 +26,85 @@ bool GraphList::has_edge(int u, int v) const {
     return false;
 }
 
-	void add_edge(int u, int v){
-		if(!hasedge(u,v)){
-		adj[u].push_back(v);
-		indegree[v]++;
-		outdegree[u]++;
-		edges.push_back({u,v});
-		}
-	}
+void GraphList::add_edge(int u, int v) {
+    if (!has_edge(u, v)) {
+        adj[u].push_back(v);
+        indegree[v]++;
+        outdegree[u]++;
+        edges.push_back({u, v});
+    }
+}
 
-	void remove_edge(int u, int v){
-		if(u < 0 || u>=(int)adj.size()) return;
-		auto it = std::find(adj[u].begin(), adj[u].end(), v);
-		if(it != adj[u].end()){
-			adj[u].erase(it);
-			indegree[v]--;
-			outdegree[u]--;
-		}
-    else{
-			return;
-		}
+void GraphList::remove_edge(int u, int v) {
+    if (u < 0 || u >= (int)adj.size()) return;
+    
+    auto it = std::find(adj[u].begin(), adj[u].end(), v);
+    if (it != adj[u].end()) {
+        adj[u].erase(it);
+        indegree[v]--;
+        outdegree[u]--;
+    } else {
+        return;
+    }
 
-		auto it2 = find(edges.begin(), edges.end(),make_pair(u,v));
-		if(it2 != edges.end()) edges.erase(it2);
-	}
+    auto it2 = std::find(edges.begin(), edges.end(), std::make_pair(u, v));
+    if (it2 != edges.end()) edges.erase(it2);
+}
 
-	void read_edges(){
-		cin >> n;
-		adj.resize(n);
-		indegree.assign(n,0);
-		outdegree.assign(n,0);
-		edges.clear();
-		int u,v;
-		while(cin >> u >> v){
-			add_edge(u,v);
+std::vector<int> GraphList::neighbors(int u) const {
+    if (u < 0 || u >= n) return {};
+    return adj[u];
+}
 
-		}
-	}
+std::unique_ptr<IGraph> GraphList::clone() const {
+    return std::make_unique<GraphList>(*this);
+}
 
-	void read_mtx(){
-		cin >> n;
-		adj.resize(n);
-		indegree.assign(n,0);
-		outdegree.assign(n,0);
-		edges.clear();
-		for(int i = 0; i<n; i++){
-			for(int j = 0; j<n; j++){
-				int val;
-				cin >> val;
-				if(val>0){
-					add_edge(i,j);
-				}
-			}
-		}
-	}
-	void resize(int n_){
-		n = n_;
-		adj.assign(n,{});
-		indegree.assign(n,0);
-		outdegree.assign(n,0);
-		edges.clear();
-	}
-	GraphList GraphList::fromMatrix(const Graphmtx& G)
-{
+// GraphList specifikus metódusok
+void GraphList::resize(int n_) {
+    n = n_;
+    adj.assign(n, {});
+    indegree.assign(n, 0);
+    outdegree.assign(n, 0);
+    edges.clear();
+}
+
+int GraphList::sources() const {
+    int res = 0;
+    for (int i = 0; i < (int)indegree.size(); i++) {
+        if (indegree[i] == 0) res++;
+    }
+    return res;
+}
+
+const std::vector<std::vector<int>>& GraphList::adjlist() const {
+    return adj;
+}
+
+const std::vector<int>& GraphList::indegrees() const {
+    return indegree;
+}
+
+const std::vector<int>& GraphList::outdegrees() const {
+    return outdegree;
+}
+
+const std::vector<std::pair<int, int>>& GraphList::get_edges() const {
+    return edges;
+}
+
+// Konverzió
+GraphList GraphList::from_matrix(const GraphMatrix& G) {
     GraphList H;
     H.resize(G.size());
 
-    for(int i=0;i<G.size();i++)
-        for(int j=0;j<G.size();j++)
-            if(G.hasedge(i,j))
-                H.add_edge(i,j);
+    for (int i = 0; i < G.size(); i++) {
+        for (int j = 0; j < G.size(); j++) {
+            if (G.has_edge(i, j)) {
+                H.add_edge(i, j);
+            }
+        }
+    }
 
     return H;
 }
-	int  sources() const{
-		int  res = 0;
-		for(int i = 0; i<indegree.size(); i++){
-			if(indegree[i] == 0) res++;
-		}
-		return res;
-	}
-
-	const vector<vector<int>>&adjlist() const{
-		return adj;
-	}
-	int size() const{
-		return n;
-	}
-	const vector<int>&indegrees() const{
-		return indegree;
-	}
-	const vector<int>&outdegrees() const{
-		return outdegree;
-	}
-	const vector<pair<int,int>>&getedges() const{
-		return edges;
-	}

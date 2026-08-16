@@ -18,4 +18,12 @@ This project uses **CMake**. To run this on your local machine, ensure you have 
 ```bash
 git clone [https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git](https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git)
 cd YOUR-REPO-NAME
-
+```
+### 2. Build the project
+It is recommended to build the project in a separate build directory: 
+```bash
+mkdir build
+cd build
+cmake ..
+make
+```

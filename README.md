@@ -2,6 +2,8 @@
 
 A robust, object-oriented C++ project demonstrating standard graph representations (Adjacency List and Matrix) and various graph algorithms. The project uses a virtual interface (`IGraph`) to allow algorithms to run seamlessly regardless of the underlying graph representation.
 
+The project started out as an assignment, and in my free time developed it further. Nonetheless, some variable names in the source code are hungarian, sorry for the incostency for anyone reading it. 
+
 ## Features
 - **Representations:** `GraphList` (Adjacency List), `GraphMatrix` (Adjacency Matrix).
 - **Traversals:** BFS (Breadth-First Search), DFS (Depth-First Search).

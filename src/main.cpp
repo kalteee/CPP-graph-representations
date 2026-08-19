@@ -3,6 +3,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <filesystem>
 
 #include "../include/graph/IGraph.h"
 #include "../include/graph/GraphList.h"
@@ -39,7 +40,19 @@ unique_ptr<IGraph> load_graph(const string& filename, bool use_matrix) {
 
     return graph;
 }
+vector<string> get_test_files() {
+    vector<string> files;
 
+    for (const auto& entry : filesystem::directory_iterator("examples")) {
+        if (entry.is_regular_file() && entry.path().extension() == ".txt") {
+            files.push_back(entry.path().string());
+        }
+    }
+
+    sort(files.begin(), files.end());
+
+    return files;
+}
 // Universal test function
 void run_tests(const IGraph& graph, const string& name) {
     cout << "=== Running tests: " << name << " ===" << endl;
@@ -70,17 +83,39 @@ void run_tests(const IGraph& graph, const string& name) {
 }
 
 int main() {
-    string test_file = "examples/graph1.txt";
+    vector<string> test_files = get_test_files();
+    if (test_files.empty()) {
+        cerr << "No graph files found in examples/." << endl;
+        return 1;
+    }
+    cout << "Available graphs:" << endl;
+    for (size_t i = 0; i < test_files.size(); ++i) {
+        cout << i + 1 << ". " << test_files[i] << endl;
+    }
 
-    // 1. Testing with adjacency list
-    cout << "Reading the Graph as Adjacency List..." << endl;
+    cout << "\nChoose a graph (1-" << test_files.size() << "): ";
+    int choice;
+    cin >> choice;
+
+    if (choice < 1 || choice > static_cast<int>(test_files.size())) {
+        cerr << "Invalid choice." << endl;
+        return 1;
+    }
+    string test_file = test_files[choice - 1];
+
+    cout << "\nSelected graph: " << test_file << endl;
+    cout << "===================================" << endl;
+    // Adjacency List
+    cout << "\nReading the Graph as Adjacency List..." << endl;
+
     auto list_graph = load_graph(test_file, false);
+
     if (list_graph) {
         run_tests(*list_graph, "Adjacency List");
     }
-
-    // 2. Testing with adjacency matrix
+    // Adjacency Matrix
     cout << "\nReading the Graph as Adjacency Matrix..." << endl;
+
     auto matrix_graph = load_graph(test_file, true);
     if (matrix_graph) {
         run_tests(*matrix_graph, "Adjacency Matrix");

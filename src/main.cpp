@@ -44,7 +44,7 @@ vector<string> get_test_files() {
     vector<string> files;
     if (!filesystem::exists("examples")) {
     cerr << "Error: examples directory not found." << endl;
-    return 1;
+    return {};
 }
     for (const auto& entry : filesystem::directory_iterator("examples")) {
         if (entry.is_regular_file() && entry.path().extension() == ".txt") {

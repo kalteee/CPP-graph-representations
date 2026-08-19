@@ -63,7 +63,7 @@ void run_tests(const IGraph& graph, const string& name) {
 
     // 1. Diameter
     int diam = Diameter::compute(graph);
-    cout << "Diameter: " << (diam == -1 ? "Not connected" : to_string(diam)) << endl;
+    cout << "Diameter: " << (diam == -1 ? "Not strongly connected" : to_string(diam)) << endl;
 
     // 2. Source 
     int source = Source::findsource(graph);

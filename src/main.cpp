@@ -42,7 +42,10 @@ unique_ptr<IGraph> load_graph(const string& filename, bool use_matrix) {
 }
 vector<string> get_test_files() {
     vector<string> files;
-
+    if (!filesystem::exists("examples")) {
+    cerr << "Error: examples directory not found." << endl;
+    return 1;
+}
     for (const auto& entry : filesystem::directory_iterator("examples")) {
         if (entry.is_regular_file() && entry.path().extension() == ".txt") {
             files.push_back(entry.path().string());
